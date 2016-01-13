@@ -12,13 +12,13 @@ class Phyml < Formula
   url "https://github.com/stephaneguindon/phyml/archive/v3.2.0.tar.gz"
   sha256 "9fec8fc26e69cad8d58bf2c9433b531754e4f026dc3464d07958b6c824783fde"
 
-  depends_on "autoconf"
-  depends_on "automake"
-  depends_on "libtool"
-  depends_on "pkg-config"
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
+  depends_on "pkg-config" => :build
 
   def install
-    system "chmod", "+x", "./autogen.sh"
+    FileUtils.chmod 0755, 'autogen.sh'
     system "./autogen.sh"
 
     # separate steps required
