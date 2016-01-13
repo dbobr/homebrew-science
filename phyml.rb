@@ -1,27 +1,30 @@
 class Phyml < Formula
   desc "Fast maximum likelihood-based phylogenetic inference"
+
   bottle do
-    cellar :any
-    sha256 "ccae08800290289e8989d6da5aab65adb6cded93e6a32b284f184a7c372f947b" => :yosemite
-    sha256 "c8cc4b9434128305c7a759a73e67f28dc3a4418531be80694ab80a06786e770d" => :mavericks
-    sha256 "723aa3d01acf9ec3b4fc4aa8ed48abd0db5208abb9c7f8e23c5549e6668a29b5" => :mountain_lion
+    cellar :any_skip_relocation
+    sha256 "fcb726e611ecca738807f1263a942c413bda01eed6f340b17c3a206c9c72d737" => :yosemite
   end
 
   # tag "bioinformatics"
   # doi "10.1093/sysbio/syq010"
   homepage "http://www.atgc-montpellier.fr/phyml/"
-  url "https://phyml.googlecode.com/files/phyml-20120412.tar.gz"
-  sha256 "a43e51534a1ae2d1ee4c94ced3a1855813ff4872a6c9c2b83b369ddb71198417"
+  url "https://github.com/stephaneguindon/phyml/archive/v3.2.0.tar.gz"
+  sha256 "9fec8fc26e69cad8d58bf2c9433b531754e4f026dc3464d07958b6c824783fde"
+
+  depends_on "autoconf"
+  depends_on "automake"
+  depends_on "libtool"
 
   def install
+    system "chmod", "+x", "./autogen.sh"
+    system "./autogen.sh"
+
     # separate steps required
     system "./configure", "--prefix=#{prefix}"
     system "make"
 
-    system "./configure", "--prefix=#{prefix}", "--enable-phytime"
-    system "make"
-
-    bin.install "src/phyml", "src/phytime"
+    bin.install "src/phyml"
     doc.install "doc/phyml-manual.pdf"
     pkgshare.install Dir["examples/*"]
   end
