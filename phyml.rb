@@ -15,7 +15,7 @@ class Phyml < Formula
   depends_on "autoconf"
   depends_on "automake"
   depends_on "libtool"
-  depends_on "pkg-config"`
+  depends_on "pkg-config"
 
   def install
     system "chmod", "+x", "./autogen.sh"
