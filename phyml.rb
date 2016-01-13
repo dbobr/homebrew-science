@@ -18,7 +18,7 @@ class Phyml < Formula
   depends_on "pkg-config" => :build
 
   def install
-    FileUtils.chmod 0755, 'autogen.sh'
+    chmod 0755, 'autogen.sh'
     system "./autogen.sh"
 
     # separate steps required
